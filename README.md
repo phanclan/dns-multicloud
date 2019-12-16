@@ -216,9 +216,9 @@ The repository has a number of files within it. We will look at each terraform f
      └── variables.tf
      0 directories, 8 files
 
-[**main.tf](https://github.com/lhaig/dns-multicloud/blob/master/main.tf)**
+**backend.tf**
 
-This file contains all the general items such as provider blocks and the backend configuration.
+This file contains the backend configuration.
 
     # Remote Backend Configuration:
 
@@ -232,6 +232,15 @@ This file contains all the general items such as provider blocks and the backend
         }
       }
     }
+
+You will need to update the following sections with the details for your environment.
+
+  - organization = `dns-multicloud-org` (Your organization name)
+  - name = `dns-multicloud` (Your workspace name)
+
+[**main.tf](https://github.com/lhaig/dns-multicloud/blob/master/main.tf)**
+
+This file contains all the general items such as provider blocks.
 
     # AWS General Configuration
 
@@ -253,11 +262,6 @@ This file contains all the general items such as provider blocks and the backend
     provider "azurerm" {
       version = "~>1.32.1"
     }
-
-You will need to update the following sections with the details for your environment.
-
-    dns-multicloud-org (Your organization name)
-    dns-multicloud (Your workspace name)
 
 **Save the file and commit it to your repository.**
 
