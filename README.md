@@ -238,7 +238,7 @@ You will need to update the following sections with the details for your environ
   - organization = `dns-multicloud-org` (Your organization name)
   - name = `dns-multicloud` (Your workspace name)
 
-[**main.tf](https://github.com/lhaig/dns-multicloud/blob/master/main.tf)**
+[**main.tf**](https://github.com/lhaig/dns-multicloud/blob/master/main.tf)
 
 This file contains all the general items such as provider blocks.
 
@@ -267,7 +267,7 @@ This file contains all the general items such as provider blocks.
 
 We will now step through the other files in the repository.
 
-[**azure.tf](https://github.com/lhaig/dns-multicloud/blob/master/azure.tf)**
+[**azure.tf**](https://github.com/lhaig/dns-multicloud/blob/master/azure.tf)
 
 This file describes the creation of the delegated zone that is hosted in the Azure DNS service. The declaration creates a dedicated [resource group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview#resource-groups) for the hosted DNS to minimise the risk of it being deleted during normal day to day operations.
 
@@ -290,10 +290,10 @@ This file describes the creation of the delegated zone that is hosted in the Azu
       }
     }
 
-[**gcp.tf](https://github.com/lhaig/dns-multicloud/blob/master/gcp.tf)**
+[**gcp.tf**](https://github.com/lhaig/dns-multicloud/blob/master/gcp.tf)
 
-This file describes the creation of the delegated zone that is hosted in the GCP DNS service. One thing to note is that when you create a zone in GCP, the dns_name argument needs to have a DNS name with the . at the end 
-(e.g. *main.gcp.hashidemos.io.*). Don’t remove the period from the code.
+This file describes the creation of the delegated zone that is hosted in the GCP DNS service. One thing to note is that when you create a zone in GCP, the `dns_name` argument needs to have a DNS name with the "`.`" at the end 
+(e.g. `main.gcp.hashidemos.io.`). Don’t remove the period from the code.
 
     # GCP SUBZONE
 
@@ -310,13 +310,13 @@ This file describes the creation of the delegated zone that is hosted in the GCP
       }
     }
 
-[**aws.tf](https://github.com/lhaig/dns-multicloud/blob/master/aws.tf)**
+[**aws.tf**](https://github.com/lhaig/dns-multicloud/blob/master/aws.tf)
 
 This file contains the declared resources for AWS. It is the main file that does the final configuration of the delegated domains for each Cloud Provider.
 
 Let us step through them.
 
-This section in the beginning uses the data block to gather information about the current AWS hosted zone.
+This section in the beginning uses the `data` block to gather information about the current AWS hosted zone.
 
     # Query the current AWS master zone
 
@@ -324,7 +324,7 @@ This section in the beginning uses the data block to gather information about th
       name = var.hosted-zone
     }
 
-This section is where the delegated [Route53](https://aws.amazon.com/route53/) zones that will be used in AWS are described. It then uses an **aws_route53_record** resource to create the NS records for the delegated zone which it gathers as output from the zone created earlier.
+This section is where the delegated [Route53](https://aws.amazon.com/route53/) zones that will be used in AWS are described. It then uses an **aws_route53_record** resource to create the NS records for the **delegated zone** which it gathers as output from the zone created earlier.
 
     # AWS SUBZONE
 
