@@ -31,30 +31,30 @@ variable "aws_region" {
 
 # Azure
 
-variable "create_azure_dns_zone" {
-  description = "Set to true if you want to deploy the Azure delegated zone."
-  type        = bool
-  default     = "false"
-}
+# variable "create_azure_dns_zone" {
+#   description = "Set to true if you want to deploy the Azure delegated zone."
+#   type        = bool
+#   default     = "false"
+# }
 
-variable "azure_location" {
-  description = "The azure location to deploy the DNS service"
-  default     = "West Europe"
-}
+# variable "azure_location" {
+#   description = "The azure location to deploy the DNS service"
+#   default     = "West Europe"
+# }
 
 # GCP
 
-variable "create_gcp_dns_zone" {
-  description = "Set to true if you want to deploy the Azure delegated zone."
-  type        = bool
-  default     = "false"
-}
+# variable "create_gcp_dns_zone" {
+#   description = "Set to true if you want to deploy the Azure delegated zone."
+#   type        = bool
+#   default     = "false"
+# }
 
-variable "gcp_project" {
-  description = "GCP project name"
-}
+# variable "gcp_project" {
+#   description = "GCP project name"
+# }
 
-variable "gcp_region" {
-  description = "GCP region, e.g. us-east1"
-  default     = "europe-west3"
-}
+# variable "gcp_region" {
+#   description = "GCP region, e.g. us-east1"
+#   default     = "europe-west3"
+# }
