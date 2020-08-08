@@ -1,4 +1,10 @@
 hosted-zone = "hashidemos.io"
 namespace = "pphan"
-owner = "pphan"
+owner = "pphan@hashicorp.com"
 create_aws_dns_zone = "true"
+create_azure_dns_zone = "false"
+create_gcp_dns_zone = "false"
+
+# aws_region = "us-west-2"
+# azure_location = "us-west"
+gcp_region = "us-west"

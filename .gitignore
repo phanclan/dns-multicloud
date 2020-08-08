@@ -32,6 +32,9 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+# no creds
+*.pem
+
 # misc
 variable-scripts/
 .DS_Store
