@@ -8,7 +8,11 @@ resource "google_dns_managed_zone" "gcp_sub_zone" {
   description       = "Managed by Terraform, Delegated Sub Zone for GCP for ${var.namespace}"
   labels = {
     name = var.namespace
-    # owner = var.owner
-    # created-by = var.created-by
+    # owner = var.owner # see note below. doesn't like email addresses
+    created-by = var.created-by
   }
 }
+
+# GCP only allows `-` and `_` symbols in their tags, and an email address contains `@` and `.`.
+# Information on GCP label format limits
+# https://cloud.google.com/compute/docs/labeling-resources#label_format
