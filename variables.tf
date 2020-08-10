@@ -50,9 +50,9 @@ variable "create_gcp_dns_zone" {
   default     = "false"
 }
 
-# variable "gcp_project" {
-#   description = "GCP project name"
-# }
+variable "gcp_project" {
+  description = "GCP project name"
+}
 
 variable "gcp_region" {
   description = "GCP region, e.g. us-east1"
