@@ -70,15 +70,15 @@ resource "aws_route53_zone" "gcp_sub_zone" {
  }
 }
 
-#  resource "aws_route53_record" "gcp_sub_zone" {
-#    count = var.create_gcp_dns_zone ? 1 : 0
-#    zone_id = "${data.aws_route53_zone.main.zone_id}"
-#    name    = "${var.namespace}.gcp.${var.hosted-zone}"
-#    type    = "NS"
-#    ttl     = "30"
+ resource "aws_route53_record" "gcp_sub_zone" {
+   count = var.create_gcp_dns_zone ? 1 : 0
+   zone_id = "${data.aws_route53_zone.main.zone_id}"
+   name    = "${var.namespace}.gcp.${var.hosted-zone}"
+   type    = "NS"
+   ttl     = "30"
 
-#    records = [
-#      for gcpns in google_dns_managed_zone.gcp_sub_zone.0.name_servers:
-#      gcpns
-#     ]
-#  }
+   records = [
+     for gcpns in google_dns_managed_zone.gcp_sub_zone.0.name_servers:
+     gcpns
+    ]
+ }
