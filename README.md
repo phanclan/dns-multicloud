@@ -8,7 +8,7 @@ The best practice is to deploy a dedicated DNS delegated subdomain into each clo
 
 This blog post is going to show you how this could be done using Terraform Cloud. If you have a [Terraform Enterprise](https://www.terraform.io/docs/enterprise/index.html) installation in your company, you could use exactly the same configuration and setup to deploy this example from there. The reason for this is that Terraform Enterprise is deployed using the same engine that is used within Terraform Cloud.
 
-The git repository for this blog post can be found here: 
+The git repository for this blog post can be found here:
 [https://github.com/lhaig/dns-multicloud](https://github.com/lhaig/dns-multicloud)
 
 You can read more about Terraform Enterprise here:
@@ -57,71 +57,75 @@ Fork the [https://github.com/lhaig/dns-multicloud.git](https://github.com/lhaig/
 
 Now clone the git repository,
 
-    git clone https://github.com/YOURNAME/dns-multicloud.git
-    cd dns-multicloud
+```
+git clone https://github.com/YOURNAME/dns-multicloud.git
+cd dns-multicloud
+```
 
 Open the file [variables.tf](https://github.com/lhaig/dns-multicloud/blob/master/variables.tf) in your editor. It will look like this:
 
-    # General
-    variable "owner" {
-      description = "Person Deploying this Stack e.g. john-doe"
-    }
+```go
+# General
+variable "owner" {
+  description = "Person Deploying this Stack e.g. john-doe"
+}
 
-    variable "namespace" {
-      description = "Name of the zone e.g. demo"
-    }
+variable "namespace" {
+  description = "Name of the zone e.g. demo"
+}
 
-    variable "created-by" {
-      description = "Tag used to identify resources created programmatically by Terraform"
-      default     = "terraform"
-    }
+variable "created-by" {
+  description = "Tag used to identify resources created programmatically by Terraform"
+  default     = "terraform"
+}
 
-    variable "hosted-zone" {
-      description = "The name of the dns zone on Route 53 that will be used as the master zone "
-    }
+variable "hosted-zone" {
+  description = "The name of the dns zone on Route 53 that will be used as the master zone "
+}
 
-    # AWS
+# AWS
 
-    variable "create_aws_dns_zone" {
-      description = "Set to true if you want to deploy the AWS delegated zone."
-      type        = bool
-      default     = "false"
-    }
+variable "create_aws_dns_zone" {
+  description = "Set to true if you want to deploy the AWS delegated zone."
+  type        = bool
+  default     = "false"
+}
 
-    variable "aws_region" {
-      description = "The region to create resources."
-      default     = "eu-west-2"
-    }
+variable "aws_region" {
+  description = "The region to create resources."
+  default     = "eu-west-2"
+}
 
-    # Azure
+# Azure
 
-    variable "create_azure_dns_zone" {
-      description = "Set to true if you want to deploy the Azure delegated zone."
-      type        = bool
-      default     = "false"
-    }
+variable "create_azure_dns_zone" {
+  description = "Set to true if you want to deploy the Azure delegated zone."
+  type        = bool
+  default     = "false"
+}
 
-    variable "azure_location" {
-      description = "The azure location to deploy the DNS service"
-      default     = "West Europe"
-    }
+variable "azure_location" {
+  description = "The azure location to deploy the DNS service"
+  default     = "West Europe"
+}
 
-    # GCP
+# GCP
 
-    variable "create_gcp_dns_zone" {
-      description = "Set to true if you want to deploy the Azure delegated zone."
-      type        = bool
-      default     = "false"
-    }
+variable "create_gcp_dns_zone" {
+  description = "Set to true if you want to deploy the Azure delegated zone."
+  type        = bool
+  default     = "false"
+}
 
-    variable "gcp_project" {
-      description = "GCP project name"
-    }
+variable "gcp_project" {
+  description = "GCP project name"
+}
 
-    variable "gcp_region" {
-      description = "GCP region, e.g. us-east1"
-      default     = "europe-west3"
-    }
+variable "gcp_region" {
+  description = "GCP region, e.g. us-east1"
+  default     = "europe-west3"
+}
+```
 
 Now open the workspace [Variables](https://www.terraform.io/docs/cloud/workspaces/variables.html) section in the workspace and create and populate the variables as they are listed above. The result should look like this:
 
@@ -138,14 +142,14 @@ Terraform Cloud does not allow new line characters in variables and so needs to 
 Follow the steps below to prepare them.
 
     vim gcp-credentials.json
-    
+
     then press :
-    
-    enter the following 
+
+    enter the following
     %s;\n; ;g
-    
+
     Press enter
-    
+
     Save the file by pressing : then wq and press enter
 
 If you do not have access to vim in your environment. Open the editor of your choice and remove all Carriage returns from the file so the complete json file is on one line.
@@ -292,7 +296,7 @@ This file describes the creation of the delegated zone that is hosted in the Azu
 
 [**gcp.tf**](https://github.com/lhaig/dns-multicloud/blob/master/gcp.tf)
 
-This file describes the creation of the delegated zone that is hosted in the GCP DNS service. One thing to note is that when you create a zone in GCP, the `dns_name` argument needs to have a DNS name with the "`.`" at the end 
+This file describes the creation of the delegated zone that is hosted in the GCP DNS service. One thing to note is that when you create a zone in GCP, the `dns_name` argument needs to have a DNS name with the "`.`" at the end
 (e.g. `main.gcp.hashidemos.io.`). Don’t remove the period from the code.
 
     # GCP SUBZONE
@@ -405,7 +409,7 @@ This section creates the GCP delegated zone using the outputs from the resources
       type    = "NS"
       ttl     = "30"
 
-      records = [ 
+      records = [
          for gcpns in
            google_dns_managed_zone.gcp_sub_zone.0.name_servers:
          gcpns
