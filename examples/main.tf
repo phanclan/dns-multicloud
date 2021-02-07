@@ -33,14 +33,22 @@ module "records" {
       records = [
         "8.8.8.7",
       ]
+    },
+    {
+      name    = "apigateway2"
+      type    = "A"
+      ttl     = 1800
+      records = [
+        "8.8.8.2",
+      ]
     }
   ]
 }
-# output "this_route53_record_name" {
-#   description = "The name of the record"
-#   value       = module.records.this_route53_record_name
-# }
-# output "this_route53_record_fqdn" {
-#   description = "FQDN built using the zone domain and name"
-#   value       = module.records.this_route53_record_fqdn
-# }
+output "this_route53_record_name" {
+  description = "The name of the record"
+  value       = module.records.this_route53_record_name
+}
+output "this_route53_record_fqdn" {
+  description = "FQDN built using the zone domain and name"
+  value       = module.records.this_route53_record_fqdn
+}
